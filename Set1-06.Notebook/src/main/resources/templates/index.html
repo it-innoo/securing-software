@@ -7,5 +7,15 @@
     <body>
         <h1>Notebook!</h1>
 
+        <p th:each="note : ${notes}">
+            <span th:text="${note}">note</span>
+        </p>
+
+        <h2>Add a new note</h2>
+
+        <form th:action="@{/}" method="POST">
+            <input type="text" name="content"/>
+            <input type="submit" value="Add"/>
+        </form>
     </body>
 </html>
