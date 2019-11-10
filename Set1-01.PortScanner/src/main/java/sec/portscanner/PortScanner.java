@@ -37,11 +37,15 @@ public class PortScanner {
         start = Math.max(start, MIN_PORT);
         end = Math.min(end, MAX_PORT);
 
-        for (int i = start; i <= end; i++) {
+        for (int port = start; port <= end; port++) {
             try {
-                Socket socket = new Socket(address, i);
+                Socket socket = new Socket(address, port);
+                accessiblePorts.add(port);
 
-                accessiblePorts.add(i);
+                Scanner lukija = new Scanner(socket.getInputStream());
+                while (lukija.hasNextLine()) {
+                    System.out.println(lukija.nextLine());
+                }
             } catch (Throwable t) {
             }
         }
